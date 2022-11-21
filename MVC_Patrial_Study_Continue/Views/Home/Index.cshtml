@@ -1,0 +1,50 @@
+﻿@model HomeVM
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>LastName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Employee item in Model.Employees)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                </tr>
+            }
+    </tbody>
+</table>
+<button id="btnGetAll" class="btn btn-primary">
+    Get Category
+</button>
+<ul id="categoryList">
+
+
+</ul>
+<button id="btnErase" class="btn btn-block">
+    Erase Category
+
+</button>
+
+<script>
+    $(function () {
+        $("#btnGetAll").click(function () {
+            $.get("/Home/GetAllCategories", function (upcomingPage) {
+                $("#categoryList").html(upcomingPage);
+            })
+        })
+
+        $("#btnErase").click(function () {
+            $("#categoryList").html("");
+
+        })
+
+    })
+
+</script>
